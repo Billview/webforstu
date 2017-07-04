@@ -1,4 +1,5 @@
 // JavaScript Document
 $(document).ready(function(){
-	alert("hello");
+	var odiv=document.getElementById('div3');
+	odiv.
 })
