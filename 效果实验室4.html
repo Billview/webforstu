@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+	body {margin: 0px;padding: 0px;}
+	
+</style>
+<script>
+window.onload=function()
+{
+var odiv1=document.getElementById('div1');
+var odiv2=document.getElementById('div2');
+var odiv3=document.getElementById('div3');
+var oimg=document.getElementsByClassName('screenimg');
+
+var owidth=document.documentElement.clientWidth;
+var oheight=window.innerHeight;
+	for(var i=0;i<oimg.length;i++)
+		{
+			oimg[0].style.width=400+"px";	
+		}
+	
+}
+
+
+</script>
+</head>
+
+<body>
+<div id="div1">
+	<div id="div2"><img class="screenimg" src="4.jpg"></div>
+	<div id="div3"></div>
+</div>
+</body>
+</html>
+
+
+
+

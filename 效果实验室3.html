@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="jquery-3.2.1.min.js"></script>
+<style>
+	body {margin: 0px;padding: 0px;}
+	.vessel {overflow: hidden;}
+	#div1 {position:absolute;z-index: -1;overflow:hidden;}
+	#div_move {position: absolute;}
+	#div3 {position: fixed;width: 100px;height: 200px;top: 200px;background: #565353;z-index: 10;}
+</style>
+<script>
+$(Element).ready(function(){
+	var owidth=document.documentElement.clientWidth;
+	var oheight=window.innerHeight;
+	var ojpg=document.getElementsByClassName('bgimg');
+	var odiv=document.getElementsByClassName('vessel');
+	var odiv1=document.getElementById('div1');
+	var odiv_move=document.getElementById('div_move');
+
+	odiv1.style.width=owidth+"px";
+	odiv1.style.height=oheight+"px";
+	
+	for(var i=0;i<ojpg.length;i++)	
+		{
+			ojpg[i].style.width=owidth+"px";	
+		}
+	for(var i=0;i<odiv.length;i++)
+		{
+			if(ojpg[0].offsetHeight<oheight)
+				{
+					odiv[i].style.height=ojpg[0].offsetHeight+"px";
+				}
+			else
+				{
+					odiv[i].style.height=oheight+"px";
+				}
+		}
+	
+	var odiv3=document.getElementById("div3");
+	var i=0;
+	odiv3.onclick=function()
+	{
+		i++;
+		odiv_move.style.top=-odiv[0].offsetHeight*i+"px";
+	}
+	
+//鼠标滚动控制页面
+	var i=0;
+	var l=0;
+	function move(event)
+	{
+		if(event.wheelDelta)				//IE chcome鼠标滚动切换页面
+			{
+				if(event.wheelDelta>0)
+				{
+					i++;			//记录鼠标滚动次数
+					var j=i%10;		//减缓鼠标滚动速度
+					if(0===j)
+						{
+							l++;
+							if(l<6) {odiv_move.style.top=-odiv[0].offsetHeight*l+"px";}
+							else 
+							{
+								l=6;
+								odiv_move.style.top=-odiv[0].offsetHeight*5+"px";
+							}
+						}
+				}
+				if(event.wheelDelta<0)
+				{
+					i++;
+					var j=i%10;
+					if(0===j)
+						{
+							l--;
+							if(l>0) {odiv_move.style.top=-odiv[0].offsetHeight*l+"px";}
+							else 
+							{
+								l=0;
+								odiv_move.style.top=0+"px"
+							}
+						}
+				}
+			}
+		else if(event.detail)				//火狐浏览器鼠标滚动切换页面
+			{
+				if(event.detail<0)
+				{
+					i++;
+					var j=i%10;
+					if(0===j)
+						{
+							l++;
+							if(l<6) {odiv_move.style.top=-odiv[0].offsetHeight*l+"px";}
+							else 
+							{
+								l=6;
+								odiv_move.style.top=-odiv[0].offsetHeight*5+"px";
+							}
+						}
+				}
+				if(event.detail>0)
+				{
+					i++;
+					var j=i%10;
+					if(0===j)
+						{
+							l--;
+							if(l>0) {odiv_move.style.top=-odiv[0].offsetHeight*l+"px";}
+							else 
+							{
+								l=0;
+								odiv_move.style.top=0+"px"
+							}
+						}
+				}
+			
+			}
+	}//结束
+//鼠标滚动控制页面结束位置
+	
+document.onmousewheel=move;					//IE Chrome注册鼠标滚动事件
+document.addEventListener("DOMMouseScroll",move,false);		//火狐注册鼠标滚动事件
+	
+	
+});
+	
+	
+</script>
+</head>
+
+<body>
+<div id="div1">
+	<div id="div_move">
+		<div class="vessel"><img class="bgimg" src="1.jpg"></div>
+		<div class="vessel"><img class="bgimg" src="2.jpg"></div>
+		<div class="vessel"><img class="bgimg" src="3.jpg"></div>
+		<div class="vessel"><img class="bgimg" src="4.jpg"></div>
+		<div class="vessel"><img class="bgimg" src="5.jpg"></div>
+		<div class="vessel"><img class="bgimg" src="6.jpg"></div>
+	</div>
+</div>
+
+<div id="div3">文件</div>
+</body>
+</html>
